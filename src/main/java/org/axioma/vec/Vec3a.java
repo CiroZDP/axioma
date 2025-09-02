@@ -130,4 +130,10 @@ public final class Vec3a {
 		return FloatMath.invsqrt(Vec3a.lengthSquared(v));
 	}
 	
+	
+	
+	public static final float[] normalize(final float[] v) {
+		final float invLength = Vec3a.invLength(v);
+		return scale(v, invLength);
+	}
 }

@@ -9,12 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		final float[] vec = new float[3]; // TODO: Vec3a.create
 		Vec3a.add(vec, 1, 1, 0);
-		
-		// TODO: 2. Inverse length
-		final float length = Vec3a.invLength(vec);
-		
-		// TODO: 3. normalize()
-		Vec3a.mul(vec, length, length, length);
+		Vec3a.normalize(vec);
 		
 		System.out.println(Arrays.toString(vec));
 	}
