@@ -4,7 +4,7 @@ import static org.lwml.FloatMath.*;
 
 import java.util.Arrays;
 
-public final record Vec3(float[] c) {
+public final record Vec3(float... c) {
 
 	public static final int X = 0, Y = 1, Z = 2;
 
@@ -12,11 +12,6 @@ public final record Vec3(float[] c) {
 		this(new float[3]);
 	}
 
-	public Vec3(final float x, final float y, final float z) {
-		this(new float[3]);
-		this.set(x, y, z);
-	}
-	
 	public Vec3(final Vec3 other) {
 		this(new float[3]);
 		this.set(other);
@@ -42,10 +37,8 @@ public final record Vec3(float[] c) {
 		return new Vec3(this);
 	}
 
-	public final Vec3 set(final float x, final float y, final float z) {
-		this.c[X] = x;
-		this.c[Y] = y;
-		this.c[Z] = z;
+	public final Vec3 set(final float... c) {
+		System.arraycopy(c, 0, this.c, 0, 3);
 		return this;
 	}
 
@@ -196,12 +189,8 @@ public final record Vec3(float[] c) {
 		return Vec3.invLength(c[X], c[Y], c[Z]);
 	}
 	
-	public final Vec3 normalize(final Vec3 dest) {
-		return dest.scale(this.invLength());
-	}
-	
 	public final Vec3 normalize() {
-		return normalize(this);
+		return this.scale(this.invLength());
 	}
 
 	public final float dot(final float x, final float y, final float z) {
@@ -224,10 +213,12 @@ public final record Vec3(float[] c) {
 	}
 	
 	public final Vec3 cross(final float x, final float y, final float z, final Vec3 dest) {
-        dest.c[X] = fma(c[Y], z, -c[Z] * y);
-        dest.c[Y] = fma(c[Z], x, -c[X] * z);
-        dest.c[Z] = fma(c[X], y, -c[Y] * x);
-        return dest;
+        final float[] ans = new float[3];
+		
+		ans[X] = fma(c[Y], z, -c[Z] * y);
+        ans[Y] = fma(c[Z], x, -c[X] * z);
+        ans[Z] = fma(c[X], y, -c[Y] * x);
+        return dest.set(ans);
     }
 	
 	public final Vec3 cross(final float x, final float y, final float z) {
