@@ -109,15 +109,15 @@ public final record Vec3(float[] c) implements Cloneable {
 	}
 
 	public final Vec3 sub(final float tx, final float ty, final float tz) {
-		return add(tx, ty, tz, this);
+		return sub(tx, ty, tz, this);
 	}
 
 	public final Vec3 sub(final Vec3 t, final Vec3 dst) {
-		return add(t.x(), t.y(), t.z(), dst);
+		return sub(t.x(), t.y(), t.z(), dst);
 	}
 
 	public final Vec3 sub(final Vec3 t) {
-		return add(t.x(), t.y(), t.z(), this);
+		return sub(t.x(), t.y(), t.z(), this);
 	}
 	
 	public final Vec3 scale(final float s, final Vec3 dest) {
