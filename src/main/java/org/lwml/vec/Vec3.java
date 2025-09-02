@@ -17,6 +17,10 @@ public final record Vec3(float[] c) {
 		this(new float[3]);
 		this.set(x, y, z);
 	}
+	
+	public static final Vec3 direction(final float dX, final float dY, final float dZ) {
+		return new Vec3(dX, dY, dZ).normalize();
+	}
 
 	public final Vec3 set(final float x, final float y, final float z) {
 		this.c[X] = x;
@@ -161,7 +165,7 @@ public final record Vec3(float[] c) {
 	}
 	
 	public final float lengthSquared() {
-		return fma(X, X, fma(Y, Y, Z * Z));
+		return fma(c[X], c[X], fma(c[Y], c[Y], c[Z] * c[Z]));
 	}
 	
 	public final float length() {
@@ -171,7 +175,53 @@ public final record Vec3(float[] c) {
 	public final float invLength() {
 		return invsqrt(lengthSquared());
 	}
+	
+	public final Vec3 normalize(final Vec3 dest) {
+		return dest.scale(this.invLength());
+	}
+	
+	public final Vec3 normalize() {
+		return normalize(this);
+	}
 
+	public final float dot(final float x, final float y, final float z) {
+		return fma(c[X], x, fma(c[Y], y, z));
+	}
+	
+	public final float dot(final Vec3 other) {
+		return dot(other.c[X], other.c[Y], other.c[Z]);
+	}
+	
+	public final Vec3 mulAdd(final Vec3 a, final Vec3 b, final Vec3 dest) {
+		dest.c[X] = fma(c[X], a.c[X], b.c[X]);
+		dest.c[Y] = fma(c[Y], a.c[Y], b.c[Y]);
+		dest.c[Z] = fma(c[Z], a.c[Z], b.c[Z]);
+		return dest;
+	}
+	
+	public final Vec3 mulAdd(final Vec3 a, final Vec3 b) {
+		return mulAdd(a, b, this);
+	}
+	
+	public final Vec3 cross(final float x, final float y, final float z, final Vec3 dest) {
+        dest.c[X] = fma(c[Y], z, -c[Z] * y);
+        dest.c[Y] = fma(c[Z], x, -c[X] * z);
+        dest.c[Z] = fma(c[X], y, -c[Y] * x);
+        return dest;
+    }
+	
+	public final Vec3 cross(final float x, final float y, final float z) {
+		return cross(x, y, z, this);
+	}
+	
+	public final Vec3 cross(final Vec3 other, final Vec3 dest) {
+		return cross(other.c[X], other.c[Y], other.c[Z], dest);
+	}
+
+	public final Vec3 cross(final Vec3 other) {
+		return cross(other.c[X], other.c[Y], other.c[Z], this);
+	}
+	
 	public final FloatBuffer toBuffer() {
 		final FloatBuffer buf = ByteBuffer.allocateDirect(12)
 				.order(ByteOrder.nativeOrder())
