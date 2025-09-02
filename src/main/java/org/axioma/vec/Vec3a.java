@@ -190,4 +190,18 @@ public final class Vec3a {
 		return Vec3a.cross(dst, v[X], v[Y], v[Z], dst);
 	}
 	
+	
+	
+	public static final float distance(final float[] v1, final float[] v2) {
+		final float[] tmp = Vec3a.create();
+		Vec3a.sub(v1, v2, tmp);		// Distance as a vector
+		return Vec3a.length(tmp);	// Length of the distance vector
+	}
+	
+	public static final float distance(final float[] v1, final float x2, final float y2, final float z2) {
+		final float[] tmp = Vec3a.create();
+		Vec3a.sub(v1, x2, y2, z2, tmp);	// Distance as a vector
+		return Vec3a.length(tmp);		// Length of the distance vector
+	}
+	
 }
