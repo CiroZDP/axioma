@@ -94,4 +94,14 @@ public final class Vec3a {
 		return mul(dst, s[X], s[Y], s[Z], dst);
 	}
 	
+	
+	
+	public static final float lengthSquared(final float[] v) {
+		return v[X] * v[X] + v[Y] * v[Y] + v[Z] * v[Z];
+	}
+	
+	public static final float length(final float[] v) {
+		return (float) Math.sqrt(Vec3a.lengthSquared(v));
+	}
+	
 }
