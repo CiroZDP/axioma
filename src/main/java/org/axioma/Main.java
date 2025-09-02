@@ -13,8 +13,8 @@ public class Main {
 		// TODO: 2. Inverse length
 		final float length = Vec3a.length(vec);
 		
-		// TODO: 1. div function
-		Vec3a.mul(vec, 1f / length, 1f / length, 1);
+		// TODO: 3. normalize()
+		Vec3a.div(vec, length, length, length);
 		
 		System.out.println(Arrays.toString(vec));
 	}

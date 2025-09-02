@@ -95,6 +95,26 @@ public final class Vec3a {
 	}
 	
 	
+	public static final float[] div(final float[] v, final float sx, final float sy, final float sz, final float[] dst) {
+		dst[X] = v[X] / sx;
+		dst[Y] = v[Y] / sy;
+		dst[Z] = v[Z] / sz;
+		return dst;
+	}
+	
+	public static final float[] div(final float[] dst, final float sx, final float sy, final float sz) {
+		return div(dst, sx, sy, sz, dst);
+	}
+	
+	public static final float[] div(final float[] v, final float[] s, final float[] dst) {
+		return div(v, s[X], s[Y], s[Z], dst);
+	}
+	
+	public static final float[] div(final float[] dst, final float[] s) {
+		return div(dst, s[X], s[Y], s[Z], dst);
+	}
+	
+	
 	
 	public static final float lengthSquared(final float[] v) {
 		return v[X] * v[X] + v[Y] * v[Y] + v[Z] * v[Z];
