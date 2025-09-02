@@ -2,7 +2,6 @@ package org.lwml.vec;
 
 import static org.lwml.FloatMath.*;
 
-import java.nio.*;
 import java.util.Arrays;
 
 public final record Vec3(float[] c) implements Cloneable {
@@ -231,14 +230,6 @@ public final record Vec3(float[] c) implements Cloneable {
 		return this.clone().sub(other).length();
 	}
 	
-	public final FloatBuffer toBuffer() {
-		final FloatBuffer buf = ByteBuffer.allocateDirect(12)
-				.order(ByteOrder.nativeOrder())
-				.asFloatBuffer()
-				.limit(3);
-		return buf.put(c).rewind();
-	}
-
 	public Vec3 clone() {
 		return new Vec3(this);
 	}
