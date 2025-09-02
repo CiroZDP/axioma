@@ -27,7 +27,7 @@ public final record Vec3(float[] c) {
 		System.arraycopy(other.c, 0, this.c, 0, 3);
 		return this;
 	}
-	
+
 	public final Vec3 zero() {
 		Arrays.fill(c, 0);
 		return this;
@@ -60,11 +60,11 @@ public final record Vec3(float[] c) {
 		return this;
 	}
 
-	public final Vec3 add(final float tx, final float ty, final float tz, final Vec3 dst) {
-		dst.c[X] = c[X] + tx;
-		dst.c[Y] = c[Y] + ty;
-		dst.c[Z] = c[Z] + tz;
-		return dst;
+	public final Vec3 add(final float tx, final float ty, final float tz, final Vec3 dest) {
+		dest.c[X] = c[X] + tx;
+		dest.c[Y] = c[Y] + ty;
+		dest.c[Z] = c[Z] + tz;
+		return dest;
 	}
 
 	public final Vec3 add(final float tx, final float ty, final float tz) {
@@ -79,11 +79,57 @@ public final record Vec3(float[] c) {
 		return add(t.x(), t.y(), t.z(), this);
 	}
 
+	public final Vec3 sub(final float tx, final float ty, final float tz, final Vec3 dest) {
+		dest.c[X] = c[X] - tx;
+		dest.c[Y] = c[Y] - ty;
+		dest.c[Z] = c[Z] - tz;
+		return dest;
+	}
+
+	public final Vec3 sub(final float tx, final float ty, final float tz) {
+		return add(tx, ty, tz, this);
+	}
+
+	public final Vec3 sub(final Vec3 t, final Vec3 dst) {
+		return add(t.x(), t.y(), t.z(), dst);
+	}
+
+	public final Vec3 sub(final Vec3 t) {
+		return add(t.x(), t.y(), t.z(), this);
+	}
+	
+	public final Vec3 scale(final float s, final Vec3 dest) {
+		dest.c[X] = s * c[X];
+		dest.c[Y] = s * c[Y];
+		dest.c[Z] = s * c[Z];
+		return dest;
+	}
+	
+	public final Vec3 scale(final float s) {
+		return scale(s, this);
+	}
+	
+	public final Vec3 mul(final float sx, final float sy, final float sz, final Vec3 dest) {
+		dest.c[X] = c[X] * sx;
+		dest.c[Y] = c[Y] * sy;
+		dest.c[Z] = c[Z] * sz;
+		return dest;
+	}
+	
+	public final Vec3 mul(final float sx, final float sy, final float sz) {
+		return mul(sx, sy, sz, this);
+	}
+	
+	public final Vec3 mul(final Vec3 scale, final Vec3 dest) {
+		return mul(scale.c[X], scale.c[Y], scale.c[Z], dest);
+	}
+	
+	public final Vec3 mul(final Vec3 scale) {
+		return mul(scale.c[X], scale.c[Y], scale.c[Z], this);
+	}
+
 	public final FloatBuffer toBuffer() {
-		final FloatBuffer buf = ByteBuffer.allocateDirect(12)
-				.order(ByteOrder.nativeOrder())
-				.asFloatBuffer()
-				.limit(3);
+		final FloatBuffer buf = ByteBuffer.allocateDirect(12).order(ByteOrder.nativeOrder()).asFloatBuffer().limit(3);
 		buf.put(c).rewind();
 		return buf;
 	}
