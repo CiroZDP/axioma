@@ -1,5 +1,7 @@
 package org.lwml.vec;
 
+import static org.lwml.FloatMath.*;
+
 import java.nio.*;
 import java.util.Arrays;
 
@@ -156,6 +158,18 @@ public final record Vec3(float[] c) {
 	
 	public final Vec3 div(final Vec3 ns) {
 		return div(ns.c[X], ns.c[Y], ns.c[Z], this);
+	}
+	
+	public final float lengthSquared() {
+		return fma(X, X, fma(Y, Y, Z * Z));
+	}
+	
+	public final float length() {
+		return sqrt(lengthSquared());
+	}
+	
+	public final float invLength() {
+		return invsqrt(lengthSquared());
 	}
 
 	public final FloatBuffer toBuffer() {
