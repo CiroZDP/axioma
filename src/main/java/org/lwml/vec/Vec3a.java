@@ -2,6 +2,8 @@ package org.lwml.vec;
 
 import static org.lwml.FloatMath.*;
 
+import java.util.Arrays;
+
 // TODO: javadoc
 public final class Vec3a {
 
@@ -15,6 +17,11 @@ public final class Vec3a {
 	
 	public static final float[] wrap(final float x, final float y, final float z) {
 		return Vec3a.set(Vec3a.create(), x, y, z);
+	}
+	
+	public static final float[] zero(final float[] v) {
+		Arrays.fill(v, 0);
+		return v;
 	}
 	
 	
