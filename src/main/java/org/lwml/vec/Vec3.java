@@ -59,6 +59,17 @@ public final record Vec3(float[] c) {
 		this.c[Z] = z;
 		return this;
 	}
+	
+	public final Vec3 negate(final Vec3 dest) {
+		dest.c[X] = -c[X];
+		dest.c[Y] = -c[Y];
+		dest.c[Z] = -c[Z];
+		return dest;
+	}
+	
+	public final Vec3 negate() {
+		return negate(this);
+	}
 
 	public final Vec3 add(final float tx, final float ty, final float tz, final Vec3 dest) {
 		dest.c[X] = c[X] + tx;
@@ -127,11 +138,32 @@ public final record Vec3(float[] c) {
 	public final Vec3 mul(final Vec3 scale) {
 		return mul(scale.c[X], scale.c[Y], scale.c[Z], this);
 	}
+	
+	public final Vec3 div(final float nsx, final float nsy, final float nsz, final Vec3 dest) {
+		dest.c[X] = c[X] / nsx;
+		dest.c[Y] = c[Y] / nsy;
+		dest.c[Z] = c[Z] / nsz;
+		return dest;
+	}
+	
+	public final Vec3 div(final float nsx, final float nsy, final float nsz) {
+		return div(nsx, nsy, nsz, this);
+	}
+	
+	public final Vec3 div(final Vec3 ns, final Vec3 dest) {
+		return div(ns.c[X], ns.c[Y], ns.c[Z], dest);
+	}
+	
+	public final Vec3 div(final Vec3 ns) {
+		return div(ns.c[X], ns.c[Y], ns.c[Z], this);
+	}
 
 	public final FloatBuffer toBuffer() {
-		final FloatBuffer buf = ByteBuffer.allocateDirect(12).order(ByteOrder.nativeOrder()).asFloatBuffer().limit(3);
-		buf.put(c).rewind();
-		return buf;
+		final FloatBuffer buf = ByteBuffer.allocateDirect(12)
+				.order(ByteOrder.nativeOrder())
+				.asFloatBuffer()
+				.limit(3);
+		return buf.put(c).rewind();
 	}
 
 	@Override
