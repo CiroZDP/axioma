@@ -11,10 +11,10 @@ public class Main {
 		Vec3a.add(vec, 1, 1, 0);
 		
 		// TODO: 2. Inverse length
-		final float length = Vec3a.length(vec);
+		final float length = Vec3a.invLength(vec);
 		
 		// TODO: 3. normalize()
-		Vec3a.div(vec, length, length, length);
+		Vec3a.mul(vec, length, length, length);
 		
 		System.out.println(Arrays.toString(vec));
 	}

@@ -1,5 +1,7 @@
 package org.axioma.vec;
 
+import org.axioma.FloatMath;
+
 // TODO: javadoc
 public final class Vec3a {
 
@@ -121,7 +123,11 @@ public final class Vec3a {
 	}
 	
 	public static final float length(final float[] v) {
-		return (float) Math.sqrt(Vec3a.lengthSquared(v));
+		return FloatMath.sqrt(Vec3a.lengthSquared(v));
+	}
+	
+	public static final float invLength(final float[] v) {
+		return FloatMath.invsqrt(Vec3a.lengthSquared(v));
 	}
 	
 }
