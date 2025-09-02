@@ -92,6 +92,11 @@ public final class FloatMath {
 	}
 	
 	// TODO: javadoc
+	public static final float invsqrt(float n) {
+		return 1f / (float) Math.sqrt(n);
+	}
+	
+	// TODO: javadoc
 	public static final float sinDeg(final float deg) {
 		return (float) Math.sin(toRadians(deg));
 	}
