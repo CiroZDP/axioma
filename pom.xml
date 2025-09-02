@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.axioma</groupId>
-	<artifactId>axioma</artifactId>
+	<groupId>org.lwml</groupId>
+	<artifactId>lwml</artifactId>
 	<version>0.10.0</version>
-	<name>Axioma</name>
-	<description>A custom math library for Java</description>
+	<name>LwML</name>
+	<description>Lightweight math library for Java</description>
 
 	<properties>
 		<java.version>21</java.version>

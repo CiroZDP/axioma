@@ -1,4 +1,4 @@
-package org.axioma;
+package org.lwml;
 
 /**
  * A specialized math utility class for operations using {@code float}.

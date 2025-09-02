@@ -1,6 +1,6 @@
-package org.axioma.vec;
+package org.lwml.vec;
 
-import static org.axioma.FloatMath.*;
+import static org.lwml.FloatMath.*;
 
 // TODO: javadoc
 public final class Vec3a {

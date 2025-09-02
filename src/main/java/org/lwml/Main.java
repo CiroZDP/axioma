@@ -1,8 +1,8 @@
-package org.axioma;
+package org.lwml;
 
 import java.util.Arrays;
 
-import org.axioma.vec.Vec3a;
+import org.lwml.vec.Vec3a;
 
 public class Main {
 
