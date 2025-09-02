@@ -168,4 +168,26 @@ public final class Vec3a {
 		dst[Z] = fma(va[Z], vb[Z], vc[Z]);
 		return dst;
 	}
+	
+	
+	
+	public static final float[] cross(final float[] v, final float x, final float y, final float z, final float[] dst) {
+        dst[X] = fma(v[Y], z, -v[Z] * y);
+        dst[Y] = fma(v[Z], x, -v[X] * z);
+        dst[Z] = fma(v[X], y, -v[Y] * x);
+        return dst;
+    }
+	
+	public static final float[] cross(final float[] dst, final float x, final float y, final float z) {
+		return Vec3a.cross(dst, x, y, z, dst);
+	}
+	
+	public static final float[] cross(final float[] v1, final float[] v2, final float[] dst) {
+		return Vec3a.cross(v1, v2[X], v2[Y], v2[Z], dst);
+	}
+	
+	public static final float[] cross(final float[] dst, final float[] v) {
+		return Vec3a.cross(dst, v[X], v[Y], v[Z], dst);
+	}
+	
 }
