@@ -5,7 +5,7 @@ import static org.lwml.FloatMath.*;
 import java.nio.*;
 import java.util.Arrays;
 
-public final record Vec3(float[] c) {
+public final record Vec3(float[] c) implements Cloneable {
 
 	public static final int X = 0, Y = 1, Z = 2;
 
@@ -16,6 +16,11 @@ public final record Vec3(float[] c) {
 	public Vec3(final float x, final float y, final float z) {
 		this(new float[3]);
 		this.set(x, y, z);
+	}
+	
+	public Vec3(final Vec3 other) {
+		this(new float[3]);
+		this.set(other);
 	}
 	
 	public static final Vec3 direction(final float dX, final float dY, final float dZ) {
@@ -222,6 +227,10 @@ public final record Vec3(float[] c) {
 		return cross(other.c[X], other.c[Y], other.c[Z], this);
 	}
 	
+	public final float distance(final Vec3 other) {
+		return this.clone().sub(other).length();
+	}
+	
 	public final FloatBuffer toBuffer() {
 		final FloatBuffer buf = ByteBuffer.allocateDirect(12)
 				.order(ByteOrder.nativeOrder())
@@ -230,6 +239,10 @@ public final record Vec3(float[] c) {
 		return buf.put(c).rewind();
 	}
 
+	public Vec3 clone() {
+		return new Vec3(this);
+	}
+	
 	@Override
 	public String toString() {
 		return "(" + x() + ", " + y() + ", " + z() + ")";
