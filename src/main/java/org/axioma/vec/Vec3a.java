@@ -9,6 +9,14 @@ public final class Vec3a {
 	
 	private Vec3a() {}
 
+	public static final float[] create() {
+		return new float[3];
+	}
+	
+	public static final float[] wrap(final float x, final float y, final float z) {
+		return Vec3a.set(Vec3a.create(), x, y, z);
+	}
+	
 	
 	
 	public static final float[] set(final float[] dst, final float x, final float y, final float z) {
