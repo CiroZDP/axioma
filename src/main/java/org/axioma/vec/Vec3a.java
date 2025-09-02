@@ -1,6 +1,6 @@
 package org.axioma.vec;
 
-import org.axioma.FloatMath;
+import static org.axioma.FloatMath.*;
 
 // TODO: javadoc
 public final class Vec3a {
@@ -27,7 +27,7 @@ public final class Vec3a {
 	}
 	
 	public static final float[] set(final float[] dst, final float[] src) {
-		return set(dst, src[X], src[Y], src[Z]);
+		return Vec3a.set(dst, src[X], src[Y], src[Z]);
 	}
 	
 	
@@ -40,34 +40,34 @@ public final class Vec3a {
 	}
 	
 	public static final float[] add(final float[] dst, final float tx, final float ty, final float tz) {
-		return add(dst, tx, ty, tz, dst);
+		return Vec3a.add(dst, tx, ty, tz, dst);
 	}
 	
 	public static final float[] add(final float[] v, final float[] t, final float[] dst) {
-		return add(v, t[X], t[Y], t[Z], dst);
+		return Vec3a.add(v, t[X], t[Y], t[Z], dst);
 	}
 	
 	public static final float[] add(final float[] dst, final float[] t) {
-		return add(dst, t[X], t[Y], t[Z], dst);
+		return Vec3a.add(dst, t[X], t[Y], t[Z], dst);
 		
 	}
 
 	
 	
 	public static final float[] sub(final float[] v, final float tx, final float ty, final float tz, final float[] dst) {
-		return add(v, -tx, -ty, -tz, dst);
+		return Vec3a.add(v, -tx, -ty, -tz, dst);
 	}
 	
 	public static final float[] sub(final float[] dst, final float tx, final float ty, final float tz) {
-		return sub(dst, tx, ty, tz, dst);
+		return Vec3a.sub(dst, tx, ty, tz, dst);
 	}
 	
 	public static final float[] sub(final float[] v, final float[] t, final float[] dst) {
-		return sub(v, t[X], t[Y], t[Z], dst);
+		return Vec3a.sub(v, t[X], t[Y], t[Z], dst);
 	}
 	
 	public static final float[] sub(final float[] dst, final float[] t) {
-		return sub(dst, t[X], t[Y], t[Z], dst);
+		return Vec3a.sub(dst, t[X], t[Y], t[Z], dst);
 	}
 	
 	
@@ -80,7 +80,7 @@ public final class Vec3a {
 	}
 	
 	public static final float[] scale(final float[] dst, final float f) {
-		return scale(dst, f, dst);
+		return Vec3a.scale(dst, f, dst);
 	}
 	
 	
@@ -93,15 +93,15 @@ public final class Vec3a {
 	}
 	
 	public static final float[] mul(final float[] dst, final float sx, final float sy, final float sz) {
-		return mul(dst, sx, sy, sz, dst);
+		return Vec3a.mul(dst, sx, sy, sz, dst);
 	}
 	
 	public static final float[] mul(final float[] v, final float[] s, final float[] dst) {
-		return mul(v, s[X], s[Y], s[Z], dst);
+		return Vec3a.mul(v, s[X], s[Y], s[Z], dst);
 	}
 	
 	public static final float[] mul(final float[] dst, final float[] s) {
-		return mul(dst, s[X], s[Y], s[Z], dst);
+		return Vec3a.mul(dst, s[X], s[Y], s[Z], dst);
 	}
 	
 	
@@ -113,29 +113,29 @@ public final class Vec3a {
 	}
 	
 	public static final float[] div(final float[] dst, final float sx, final float sy, final float sz) {
-		return div(dst, sx, sy, sz, dst);
+		return Vec3a.div(dst, sx, sy, sz, dst);
 	}
 	
 	public static final float[] div(final float[] v, final float[] s, final float[] dst) {
-		return div(v, s[X], s[Y], s[Z], dst);
+		return Vec3a.div(v, s[X], s[Y], s[Z], dst);
 	}
 	
 	public static final float[] div(final float[] dst, final float[] s) {
-		return div(dst, s[X], s[Y], s[Z], dst);
+		return Vec3a.div(dst, s[X], s[Y], s[Z], dst);
 	}
 	
 	
 	
 	public static final float lengthSquared(final float[] v) {
-		return v[X] * v[X] + v[Y] * v[Y] + v[Z] * v[Z];
+		return fma(v[X], v[X], fma(v[Y], v[Y], v[Z] * v[Z]));
 	}
 	
 	public static final float length(final float[] v) {
-		return FloatMath.sqrt(Vec3a.lengthSquared(v));
+		return sqrt(Vec3a.lengthSquared(v));
 	}
 	
 	public static final float invLength(final float[] v) {
-		return FloatMath.invsqrt(Vec3a.lengthSquared(v));
+		return invsqrt(Vec3a.lengthSquared(v));
 	}
 	
 	
@@ -143,5 +143,29 @@ public final class Vec3a {
 	public static final float[] normalize(final float[] v) {
 		final float invLength = Vec3a.invLength(v);
 		return scale(v, invLength);
+	}
+
+	public static final float[] normalize(final float[] v, final float[] dst) {
+		final float invLength = Vec3a.invLength(v);
+		return scale(v, invLength, dst);
+	}
+	
+	
+	
+	public static final float dot(final float[] v, float x, float y, float z) {
+		return fma(v[X], x, fma(v[Y], y, z));
+	}
+	
+	public static final float dot(final float[] v1, final float[] v2) {
+		return Vec3a.dot(v1, v2[X], v2[Y], v2[Z]);
+	}
+	
+	
+	
+	public static final float[] mulAddTo(final float[] dst, final float[] va, final float[] vb, final float[] vc) {
+		dst[X] = fma(va[X], vb[X], vc[X]);
+		dst[Y] = fma(va[Y], vb[Y], vc[Y]);
+		dst[Z] = fma(va[Z], vb[Z], vc[Z]);
+		return dst;
 	}
 }

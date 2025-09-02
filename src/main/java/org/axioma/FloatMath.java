@@ -111,4 +111,9 @@ public final class FloatMath {
 		return (float) Math.cos(toRadians(deg));
 	}
 	
+	// TODO: javadoc
+	public static final float fma(final float a, final float b, final float c) {
+		return a * b + c;
+	}
+	
 }
