@@ -4,7 +4,7 @@ import static org.lwml.FloatMath.*;
 
 import java.util.Arrays;
 
-public final record Vec3(float[] c) implements Cloneable {
+public final record Vec3(float[] c) {
 
 	public static final int X = 0, Y = 1, Z = 2;
 
@@ -24,6 +24,22 @@ public final record Vec3(float[] c) implements Cloneable {
 	
 	public static final Vec3 direction(final float dX, final float dY, final float dZ) {
 		return new Vec3(dX, dY, dZ).normalize();
+	}
+	
+	public static final float lengthSquared(final float x, final float y, final float z) {
+		return fma(x, x, fma(y, y, z * z));
+	}
+	
+	public static final float length(final float x, final float y, final float z) {
+		return sqrt(lengthSquared(x, y, z));
+	}
+	
+	public static final float invLength(final float x, final float y, final float z) {
+		return invsqrt(lengthSquared(x, y, z));
+	}
+	
+	public final Vec3 copy() {
+		return new Vec3(this);
 	}
 
 	public final Vec3 set(final float x, final float y, final float z) {
@@ -163,21 +179,21 @@ public final record Vec3(float[] c) implements Cloneable {
 	public final Vec3 div(final Vec3 ns, final Vec3 dest) {
 		return div(ns.c[X], ns.c[Y], ns.c[Z], dest);
 	}
-	
+
 	public final Vec3 div(final Vec3 ns) {
 		return div(ns.c[X], ns.c[Y], ns.c[Z], this);
 	}
 	
 	public final float lengthSquared() {
-		return fma(c[X], c[X], fma(c[Y], c[Y], c[Z] * c[Z]));
+		return Vec3.lengthSquared(c[X], c[Y], c[Z]);
 	}
 	
 	public final float length() {
-		return sqrt(lengthSquared());
+		return Vec3.length(c[X], c[Y], c[Z]);
 	}
 	
 	public final float invLength() {
-		return invsqrt(lengthSquared());
+		return Vec3.invLength(c[X], c[Y], c[Z]);
 	}
 	
 	public final Vec3 normalize(final Vec3 dest) {
@@ -225,15 +241,23 @@ public final record Vec3(float[] c) implements Cloneable {
 	public final Vec3 cross(final Vec3 other) {
 		return cross(other.c[X], other.c[Y], other.c[Z], this);
 	}
+
+	public final float distanceSquared(final Vec3 other) {
+		final float x = c[X] - other.c[X];
+		final float y = c[Y] - other.c[Y];
+		final float z = c[Z] - other.c[Z];
+
+		return Vec3.lengthSquared(x, y, z);
+	}
 	
 	public final float distance(final Vec3 other) {
-		return this.clone().sub(other).length();
+		final float x = c[X] - other.c[X];
+		final float y = c[Y] - other.c[Y];
+		final float z = c[Z] - other.c[Z];
+
+		return Vec3.length(x, y, z);
 	}
-	
-	public Vec3 clone() {
-		return new Vec3(this);
-	}
-	
+
 	@Override
 	public String toString() {
 		return "(" + x() + ", " + y() + ", " + z() + ")";
