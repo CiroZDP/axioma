@@ -249,6 +249,25 @@ public final record Vec3(float... c) {
 		return Vec3.length(x, y, z);
 	}
 
+	public final Vec3 lerp(final float ox, float oy, float oz, final float t, final Vec3 dest) {
+        dest.c[X] = fma(ox - c[X], t, c[X]);
+        dest.c[Y] = fma(oy - c[Y], t, c[Y]);
+        dest.c[Z] = fma(oz - c[Z], t, c[Z]);
+        return dest;
+    }
+	
+	public final Vec3 lerp(final float ox, final float oy, final float oz, final float t) {
+		return lerp(ox, oy, oz, t, this);
+	}
+
+	public final Vec3 lerp(final Vec3 other, final float t, final Vec3 dest) {
+		return lerp(other.c[X], other.c[Y], other.c[Z], t, dest);
+	}
+
+	public final Vec3 lerp(final Vec3 other, final float t) {
+		return lerp(other.c[X], other.c[Y], other.c[Z], t, this);
+	}
+	
 	@Override
 	public String toString() {
 		return "(" + x() + ", " + y() + ", " + z() + ")";
