@@ -1,16 +1,16 @@
 package org.lwml;
 
-import java.util.Arrays;
-
-import org.lwml.vec.Vec3a;
+import org.lwml.vec.Vec3;
 
 public class Main {
 
 	public static void main(String[] args) {
-		final float[] vec = Vec3a.wrap(1, 1, 0);
-		Vec3a.normalize(vec);
+		final Vec3 vec = new Vec3()
+				.translate(1, 2, 3)
+				.translate(1, 2, 3);
 		
-		System.out.println(Arrays.toString(vec));
+		System.out.println(vec);
+	
 	}
 	
 }
