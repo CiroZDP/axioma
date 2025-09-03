@@ -79,6 +79,21 @@ public final record Vec3(float... c) {
 		return this;
 	}
 	
+	public final Vec3 x(final Vec3 other) {
+		this.c[X] = other.c[X];
+		return this;
+	}
+	
+	public final Vec3 y(final Vec3 other) {
+		this.c[Y] = other.c[Y];
+		return this;
+	}
+	
+	public final Vec3 z(final Vec3 other) {
+		this.c[Z] = other.c[Z];
+		return this;
+	}
+	
 	public final Vec3 negate(final Vec3 dest) {
 		dest.c[X] = -c[X];
 		dest.c[Y] = -c[Y];
