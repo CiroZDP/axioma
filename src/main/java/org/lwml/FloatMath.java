@@ -86,32 +86,26 @@ public final class FloatMath {
 		return rad * RAD2DEG;
 	}
 
-	// TODO: javadoc
 	public static final float sqrt(float n) {
 		return (float) Math.sqrt(n);
 	}
 	
-	// TODO: javadoc
 	public static final float invsqrt(float n) {
 		return 1f / (float) Math.sqrt(n);
 	}
 	
-	// TODO: javadoc
 	public static final float sinDeg(final float deg) {
 		return (float) Math.sin(toRadians(deg));
 	}
 
-	// TODO: javadoc
 	public static final float cosDeg(final float deg) {
 		return (float) Math.cos(toRadians(deg));
 	}
 	
-	// TODO: javadoc
 	public static final float cosDeg(final float deg, final float sin) {
 		return (float) Math.cos(toRadians(deg));
 	}
 	
-	// TODO: javadoc
 	public static final float fma(final float a, final float b, final float c) {
 		return a * b + c;
 	}
