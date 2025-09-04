@@ -53,13 +53,15 @@ public final class FloatMath {
 	 * Constant by which to multiply an angle in degrees to obtain the equivalent
 	 * value in radians.
 	 */
-	private static final float DEG2RAD = 0.017453292519943295f;
+	public static final float DEG2RAD = 0.017453292519943295f;
 
 	/**
 	 * Constant by which to multiply an angle in radians to obtain the equivalent
 	 * value in degrees.
 	 */
-	private static final float RAD2DEG = 57.29577951308232f;
+	public static final float RAD2DEG = 57.29577951308232f;
+	
+	public static final float ROUNDING_ERROR = 1.0E-7f; // 0.0000001f
 
 	/** Private constructor to prevent instantiation. */
 	private FloatMath() {}
@@ -89,11 +91,11 @@ public final class FloatMath {
 	public static final float sqrt(float n) {
 		return (float) Math.sqrt(n);
 	}
-	
+
 	public static final float invsqrt(float n) {
 		return 1f / (float) Math.sqrt(n);
 	}
-	
+
 	public static final float sinDeg(final float deg) {
 		return (float) Math.sin(toRadians(deg));
 	}
@@ -101,13 +103,29 @@ public final class FloatMath {
 	public static final float cosDeg(final float deg) {
 		return (float) Math.cos(toRadians(deg));
 	}
-	
+
 	public static final float cosDeg(final float deg, final float sin) {
 		return (float) Math.cos(toRadians(deg));
 	}
-	
+
 	public static final float fma(final float a, final float b, final float c) {
 		return a * b + c;
 	}
-	
+
+	public static final float hypot2(float x, float y) {
+		return fma(x, x, y * y);
+	}
+
+	public static final float hypot(float x, float y) {
+		return sqrt(fma(x, x, y * y));
+	}
+
+	public static float hypot2(float x, float y, float z) {
+		return fma(x, x, fma(y, y, z * z));
+	}
+
+	public static float hypot(float x, float y, float z) {
+		return sqrt(fma(x, x, fma(y, y, z * z)));
+	}
+
 }
