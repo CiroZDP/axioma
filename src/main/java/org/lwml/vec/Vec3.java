@@ -13,24 +13,23 @@ public final record Vec3(float... c) {
 	}
 
 	public Vec3(final Vec3 other) {
-		this(new float[3]);
-		this.set(other);
+		this(Arrays.copyOf(other.c, 3));
 	}
 	
 	public static final Vec3 direction(final float dX, final float dY, final float dZ) {
 		return new Vec3(dX, dY, dZ).normalize();
 	}
 	
-	public static final float lengthSquared(final float x, final float y, final float z) {
+	public static final float length2(final float x, final float y, final float z) {
 		return fma(x, x, fma(y, y, z * z));
 	}
 	
 	public static final float length(final float x, final float y, final float z) {
-		return sqrt(lengthSquared(x, y, z));
+		return sqrt(length2(x, y, z));
 	}
 	
 	public static final float invLength(final float x, final float y, final float z) {
-		return invsqrt(lengthSquared(x, y, z));
+		return invsqrt(length2(x, y, z));
 	}
 	
 	public final Vec3 copy() {
@@ -192,8 +191,8 @@ public final record Vec3(float... c) {
 		return div(ns.c[X], ns.c[Y], ns.c[Z], this);
 	}
 	
-	public final float lengthSquared() {
-		return Vec3.lengthSquared(c[X], c[Y], c[Z]);
+	public final float length2() {
+		return Vec3.length2(c[X], c[Y], c[Z]);
 	}
 	
 	public final float length() {
@@ -227,13 +226,12 @@ public final record Vec3(float... c) {
 		return mulAdd(a, b, this);
 	}
 	
-	public final Vec3 cross(final float x, final float y, final float z, final Vec3 dest) {
-        final float[] ans = new float[3];
-		
-		ans[X] = fma(c[Y], z, -c[Z] * y);
-        ans[Y] = fma(c[Z], x, -c[X] * z);
-        ans[Z] = fma(c[X], y, -c[Y] * x);
-        return dest.set(ans);
+	public final Vec3 cross(final float x1, final float y1, final float z1, final Vec3 dest) {
+        final float x = c[X], y = c[Y], z = c[Z];
+		dest.c[X] = fma(y, z1, -z * y1);
+		dest.c[Y] = fma(z, x1, -x * z1);
+		dest.c[Z] = fma(x, y1, -y * x1);
+        return dest;
     }
 	
 	public final Vec3 cross(final float x, final float y, final float z) {
@@ -248,15 +246,15 @@ public final record Vec3(float... c) {
 		return cross(other.c[X], other.c[Y], other.c[Z], this);
 	}
 
-	public final float distanceSquared(final Vec3 other) {
+	public final float dist2(final Vec3 other) {
 		final float x = c[X] - other.c[X];
 		final float y = c[Y] - other.c[Y];
 		final float z = c[Z] - other.c[Z];
 
-		return Vec3.lengthSquared(x, y, z);
+		return Vec3.length2(x, y, z);
 	}
 	
-	public final float distance(final Vec3 other) {
+	public final float dist(final Vec3 other) {
 		final float x = c[X] - other.c[X];
 		final float y = c[Y] - other.c[Y];
 		final float z = c[Z] - other.c[Z];
