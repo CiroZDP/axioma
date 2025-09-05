@@ -1,6 +1,6 @@
-package org.lwml.vec;
+package org.lwtk.math.vec;
 
-import static org.lwml.FloatMath.*;
+import static org.lwtk.math.FloatMath.*;
 
 import java.util.Arrays;
 

@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.lwml</groupId>
-	<artifactId>lwml</artifactId>
+	<groupId>org.lwtk</groupId>
+	<artifactId>lwtk-math</artifactId>
 	<version>0.10.0</version>
-	<name>LwML</name>
+	<name>LWTK Math Library</name>
 	<description>Lightweight math library for Java</description>
 
 	<properties>

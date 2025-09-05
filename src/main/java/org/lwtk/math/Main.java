@@ -1,6 +1,6 @@
-package org.lwml;
+package org.lwtk.math;
 
-import org.lwml.exp.Vec4;
+import org.lwtk.math.exp.Vec4;
 
 public class Main {
 

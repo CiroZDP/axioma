@@ -1,4 +1,4 @@
-package org.lwml.exp;
+package org.lwtk.math.exp;
 
 import java.lang.reflect.Field;
 import java.lang.ref.Cleaner;
@@ -116,4 +116,8 @@ public final class Vec4 {
 				.append(w())
 				.append(")").toString();
 	}
+	
+	/// -- Native methods -- ///
+	
+	static native final void nadd(final long a, final long b, final long dest);
 }

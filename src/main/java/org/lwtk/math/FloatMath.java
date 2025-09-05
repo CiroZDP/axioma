@@ -1,4 +1,4 @@
-package org.lwml;
+package org.lwtk.math;
 
 /**
  * A specialized math utility class for operations using {@code float}.
