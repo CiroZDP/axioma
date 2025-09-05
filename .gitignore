@@ -181,3 +181,6 @@ dist/
 nbdist/
 .nb-gradle/
 
+### JNI + Machine generated ###
+generated/
+native/

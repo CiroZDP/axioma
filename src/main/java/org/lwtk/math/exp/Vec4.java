@@ -14,6 +14,8 @@ public final class Vec4 {
 	private final long padX, padY, padZ, padW;
 
 	static {
+		System.loadLibrary("lwtkmath");
+		
 		try {
 			Field f = Unsafe.class.getDeclaredField("theUnsafe");
 			f.setAccessible(true);
@@ -95,6 +97,27 @@ public final class Vec4 {
 
 	public final float w() {
 		return UNSAFE.getFloat(padW);
+	}
+	
+	public final Vec4 addJNI(Vec4 b, Vec4 dest) {
+		Vec4.nadd(this.addr, b.addr, dest.addr);
+		return dest;
+	}
+	
+	public final Vec4 addJNI(Vec4 b) {
+		return addJNI(b, this);
+	}
+	
+	public final Vec4 add(Vec4 b, Vec4 dest) {
+		dest.x(x() + b.x());
+		dest.y(y() + b.y());
+		dest.z(z() + b.z());
+		dest.w(w() + b.w());
+		return dest;
+	}
+	
+	public final Vec4 add(Vec4 b) {
+		return add(b, this);
 	}
 
 	/// -- Manual memory managment -- ///
