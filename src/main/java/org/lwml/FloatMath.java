@@ -109,7 +109,7 @@ public final class FloatMath {
 	}
 
 	public static final float fma(final float a, final float b, final float c) {
-		return a * b + c;
+		return Math.fma(a, b, c);
 	}
 
 	public static final float hypot2(float x, float y) {
