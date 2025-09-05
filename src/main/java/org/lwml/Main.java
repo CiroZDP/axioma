@@ -8,6 +8,7 @@ public class Main {
     	Vec4 vec = new Vec4();
         bench("LWTK Vector Set Manual", () -> {
         	vec.set(1, 2, 3, 4);
+        	System.out.println(vec);
         });
     }
 

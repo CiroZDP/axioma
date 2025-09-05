@@ -102,4 +102,18 @@ public final class Vec4 {
 	public final void free() {
 		UNSAFE.freeMemory(baseAddr);
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		return sb.append("(")
+				.append(x())
+				.append(", ")
+				.append(y())
+				.append(", ")
+				.append(z())
+				.append(", ")
+				.append(w())
+				.append(")").toString();
+	}
 }
